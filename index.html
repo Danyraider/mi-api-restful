@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        getData()
+        async function getData() {
+            const url = "https://jsonplaceholder.typicode.com/posts/1";
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+                // se crea los .log para coocer la estructura del .JSON
+                const json = await response.json();
+                console.log(json);
+                console.log(json.userId);
+                console.log(json.title);
+                let usuario = document.getElementById("userId")
+                usuario.value = json.userId
+
+                //seleccionar un elemento html por id
+
+                let id = document.getElementById("id")
+                id.value = json.id
+
+                let title = document.getElementById("title")
+                title.value = json.title
+
+                let body = document.getElementById("body")
+                body.value = json.body
+
+
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        async function getpost() {
+            const url = "https://jsonplaceholder.typicode.com/posts/";
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+                // se crea los .log para coocer la estructura del .JSON
+                const json = await response.json();
+                console.log(json);
+
+                const tbody = document.querySelector('#miTabla tbody');
+
+                json.forEach(item => {
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td>${item.userId}</td>
+                        <td>${item.id}</td>
+                        <td>${item.title}</td>
+                        <td>${item.body}</td>
+                    `;
+                    tbody.appendChild(fila);
+                });
+
+
+
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        getpost()
+
+
+
+    </script>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <br><label for="">id del ususrio</label><input type="text" id="userId"><br> 
+    <br><label for="">id del ususrio</label><input type="text" id="id"><br>
+    <br> <label for="">id del ususrio</label><input type="text" id="title"><br>
+    <br><label for="">id del ususrio</label><input type="text" id="body"><br>
+
+
+
+    <h1>Tabla de Datos</h1>
+    <table id="miTabla">
+        <thead>
+            <tr>
+                <th>UserID</th>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Body</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+
+</body>
+
+</html>

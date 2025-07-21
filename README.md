@@ -1,3 +1,3 @@
 "# mi-api-restful" 
 "# mi-api-restful" 
-print = "Colaborador: Javier Ángel"
+https://jsonplaceholder.typicode.com/posts/1
